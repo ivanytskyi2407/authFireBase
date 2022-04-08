@@ -1,4 +1,6 @@
-import axios from 'axios';
+const axios = require('axios').default;
+
+// axios.<method> will now provide autocomplete and parameter typings
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie/popular';
 const KEY = '084ca305e7a4e4bb3dbbc7b67e975385';
