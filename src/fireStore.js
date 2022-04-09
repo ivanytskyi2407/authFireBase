@@ -1,16 +1,4 @@
-// import { app, auth } from './auth';
-// import { getFirestore, collection, getDocs, getDoc, addDoc } from 'firebase/firestore';
-// import { onAuthStateChanged } from 'firebase/auth';
+import { app } from './auth';
+import { getDatabase, ref, set } from 'firebase/database';
 
-// const db = getFirestore(app);
-// const films = collection(db, 'films');
-// const snapshot = await getDocs(films);
-
-// // detect auth state
-// onAuthStateChanged(auth, user => {
-//   if (user !== null) console.log('logged in');
-//   else {
-//     console.log('no User');
-//   }
-// });
-// onAuthStateChanged();
+const database = getDatabase(app);

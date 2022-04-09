@@ -6,7 +6,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   getAuth,
+  onAuthStateChanged,
 } from 'firebase/auth';
+import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDyDgzI_bPeljmgMmOE_ydsk6-uC9s-z44',
@@ -23,6 +25,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const auth = getAuth();
+const database = getDatabase(app);
 
 const authForm = document.querySelector('#auth-form');
 const registerForm = document.querySelector('#register-form');
@@ -59,9 +62,6 @@ function onFormSignUp(e) {
 // // sign in
 function onFormSignIn(e) {
   e.preventDefault();
-  // // нижче ІД юзера який залогінився
-  // const userId = auth.currentUser.uid;
-  // console.log(userId);
   const userEmail = e.target.logInEmail.value;
   const userPassword = e.target.logInPassword.value;
   signInWithEmailAndPassword(auth, userEmail, userPassword)
@@ -85,3 +85,13 @@ function onFormSignOut(e) {
       alert(`${error.message}`);
     });
 }
+
+// detect auth state
+onAuthStateChanged(auth, user => {
+  if (user !== null) {
+    localStorage.setItem('currentUserUID', JSON.stringify(user.uid));
+  } else {
+    localStorage.setItem('currentUserUID', JSON.stringify('noUser'));
+  }
+});
+onAuthStateChanged();
