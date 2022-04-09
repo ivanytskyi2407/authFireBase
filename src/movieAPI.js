@@ -10,7 +10,7 @@ export async function getMovies() {
   const response = await axios.get(`${BASE_URL}?api_key=${KEY}&language=en-US&page=1`);
   try {
     const data = response.data.results;
-    console.log(data);
+    // console.log(data);
 
     return data;
   } catch (error) {
